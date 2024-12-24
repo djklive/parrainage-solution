@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Red Hat Text', sans-serif;
+}
+
+.burger_menu {
+    display: none;
+}
+
+.burger-menu.active {
+    transition: .4s ease;
+    transform: scale(1.1);
+}
+
+.sidebar {
+    position: fixed;
+    top: 0; 
+    left: 0;
+    width: 45%;
+    height: 100vh;
+    background-color: #fff;
+    padding: 1rem;
+    z-index: 100;
+    transform: scale(0);
+    transform-origin: top left;
+    transform: .3s; /* Hide the sidebar by default */
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Add opacity transition */
+    opacity: 0; /* Start with the sidebar hidden */
+}
+
+.sidebar.open {
+    transform: scale(1); /* Show the sidebar */
+    opacity: 1; /* Make it fully visible */
+}
+
+@media screen and (max-width:450px) {
+    .burger_menu {
+        display: block;
+    }
+    #links {
+       display: none; 
+    }
+    
+}
+
