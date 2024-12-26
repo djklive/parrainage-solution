@@ -17,7 +17,7 @@ $postData = $_POST;
 // Vérification du formulaire soumis
 if (isset($postData['submit'])) {
 
-    if(empty($postData['prenom']) || empty($postData['nom']) || empty($postData['email']) || empty($postData['tel']) || empty($postData['password']) || empty($postData['category'])) {
+    if(empty($postData['prenom']) || empty($postData['nom']) || empty($postData['email']) || empty($postData['tel']) || empty($postData['password'])|| empty($postData['classe']) || empty($postData['category'])) {
         $_SESSION['REGISTER_ERROR_MESSAGE'] = 'Veuillez remplir tous les champs';
     } else {
         $prenom = trim(strip_tags($postData['prenom']));
@@ -25,23 +25,34 @@ if (isset($postData['submit'])) {
         $email = trim(strip_tags($postData['email']));
         $tel = trim(strip_tags($postData['tel']));
         $password = password_hash(trim($postData['password']), PASSWORD_DEFAULT);
+        $classe = trim(strip_tags($postData['classe']));
         $category = trim(strip_tags($postData['category']));
         
-        $stmt = $mysqlClient->prepare("SELECT * FROM `usersn1` WHERE email = :email");
-        $stmt->execute(['email' => $email]);
+        $stmt1 = $mysqlClient->prepare("SELECT * FROM `usersn1` WHERE email = :email");
+        $stmt1->execute(['email' => $email]);
+
+        $stmt2 = $mysqlClient->prepare("SELECT * FROM `usersn2` WHERE email = :email");
+        $stmt2->execute(['email' => $email]);
         
 
-        if($stmt->rowCount() > 0){
+        if($stmt1->rowCount() > 0 || $stmt2->rowCount() > 0){
                 $_SESSION['REGISTER_ERROR_MESSAGE'] = 'Votre compte existe deja! ';
                 redirectToUrl('formulaireEtudiant.php');
          }else{
            
-                // Faire l'insertion en base
-                $insertUsers = $mysqlClient->prepare('INSERT INTO usersn1(nom, prenom, tel, email, password, filière) VALUES (?,?,?,?,?,?)');
-                $insertUsers->execute(array($nom, $prenom, $tel, $email, $password, $category));
-                $_SESSION['REGISTER_SUCCESS_MESSAGE'] = 'Votre compte a bien ete créer <a href="formulaireConnexion.php">connectez-vous</a>';
-                redirectToUrl('formulaireEtudiant.php');
-            
+                if ($postData['category'] == 'Niveau 1') {
+                    // Faire l'insertion en base
+                    $insertUsers = $mysqlClient->prepare('INSERT INTO usersn1(nom, prenom, tel, email, password, classe, niveau) VALUES (?,?,?,?,?,?,?)');
+                    $insertUsers->execute(array($nom, $prenom, $tel, $email, $password, $classe, $category));
+                    $_SESSION['REGISTER_SUCCESS_MESSAGE'] = 'Votre compte a bien ete créer <a href="formulaireConnexion.php">connectez-vous</a>';
+                    redirectToUrl('formulaireEtudiant.php');
+                } else if ($postData['category'] == 'Niveau 2') {
+                    $insertUsers2 = $mysqlClient->prepare('INSERT INTO usersn2(nom, prenom, tel, email, password, classe, niveau) VALUES (?,?,?,?,?,?,?)');
+                    $insertUsers2->execute(array($nom, $prenom, $tel, $email, $password, $classe, $category));
+                    $_SESSION['REGISTER_SUCCESS_MESSAGE'] = 'Votre compte a bien été créer <a href="formulaireConnexion.php">connectez-vous</a>';
+                    redirectToUrl('formulaireEtudiant.php');
+                }
+                
          }
     }
 

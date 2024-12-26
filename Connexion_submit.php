@@ -23,11 +23,14 @@ if (isset($postData['submit'])) {
         $email = $postData['email'];  
         $password = $postData['password'];
 
-        $stmt = $mysqlClient->prepare("SELECT * FROM `usersn1` WHERE email = :email");
-        $stmt->execute(['email' => $email]);
+        $stmt1 = $mysqlClient->prepare("SELECT * FROM `usersn1` WHERE email = :email");
+        $stmt1->execute(['email' => $email]);
+
+        $stmt2 = $mysqlClient->prepare("SELECT * FROM `usersn2` WHERE email = :email");
+        $stmt2->execute(['email' => $email]);
         
 
-        $user = $stmt->fetch();
+        $user = $stmt1->fetch();
 
             if ($user) {
                 
@@ -42,8 +45,24 @@ if (isset($postData['submit'])) {
                     redirectToUrl('formulaireConnexion.php');
                 }
             } else {
-                $_SESSION['LOGIN_ERROR_MESSAGE'] = 'Nous ne trouvons pas votre compte.';
-                redirectToUrl('formulaireConnexion.php');
+                $user = $stmt2->fetch();
+                
+                if ($user) {
+                    if (password_verify($password, $user['password'])) {
+                        $_SESSION['LOGGED_USER'] = [
+                            'email' => $email,
+                            'user_id' => $user['id_user'],
+                        ];
+                        redirectToUrl('profil.php?id='.$_SESSION['LOGGED_USER']['user_id']);
+                    } else {
+                        $_SESSION['LOGIN_ERROR_MESSAGE'] = 'Mot de passe incorrect.';
+                        redirectToUrl('formulaireConnexion.php');
+                    }
+                } else {
+                    $_SESSION['LOGIN_ERROR_MESSAGE'] = 'Nous ne trouvons pas votre compte.';
+                    redirectToUrl('formulaireConnexion.php');
+                }
+                
             }
         
         

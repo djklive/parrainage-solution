@@ -5,6 +5,8 @@ require_once(__DIR__ . '/config/mysql.php');
 require_once(__DIR__ . '/databaseconnect.php');
 require_once(__DIR__ . '/function.php');
 
+if (isset($_SESSION['LOGGED_USER'])) {
+
 if (isset($_GET['id'])) {
     $getid = intval($_GET['id']);
 
@@ -13,9 +15,13 @@ if (isset($_GET['id'])) {
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$user) {
-        header('Location: product_backlog.php'); // Rediriger si le projet n'existe pas
+        header('Location: formulaireConnexion.php'); // Rediriger si le projet n'existe pas
         exit();
     }
+} else {
+    redirectToUrl('formulaireConnexion.php');
+}
+
 } else {
     redirectToUrl('formulaireConnexion.php');
 }

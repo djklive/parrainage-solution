@@ -63,11 +63,17 @@ require_once(__DIR__ . '/function.php');
                 </div>
 
                 <div class="form-group">
-                    <label for="category-select" class="block mb-1">Filière</label>
+                    <label for="classe" class="block mb-1">Nom de la classe</label>
+                    <input type="text" name="classe" id="classe" class="form-input" placeholder="Nom du service">
+                    <div class="error-message"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="category-select" class="block mb-1">Niveau</label>
                     <select name="category" id="category-select" class="form-select">
-                        <option value="">Sélectionnez une catégorie</option>
-                        <option value="Génie logiciel">Génie logiciel</option>
-                        <option value="Système et réseau">Système et réseau</option>
+                        <option value="">Sélectionnez un niveau</option>
+                        <option value="Niveau 1">Niveau 1</option>
+                        <option value="Niveau 2">Niveau 2</option>
                     </select>
                 </div>
 
