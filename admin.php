@@ -5,6 +5,10 @@ require_once(__DIR__ . '/config/mysql.php');
 require_once(__DIR__ . '/databaseconnect.php');
 require_once(__DIR__ . '/function.php');
 
+if (!isset($_SESSION['LOGGED_USER'])) {
+    redirectToUrl('formulaireConnexion.php');
+}
+
 define('MAX_FILLEULS_PER_PARRAIN', 3); // Définir le nombre maximum de filleuls par parrain
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['attribution'])) {
@@ -50,22 +54,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['attribution'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Attributions</title>
-    <!-- <script src="config/tailwindcss.js"></script> -->
+    <script src="config/tailwindcss.js"></script>
     <link rel="stylesheet" href="style/admin.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Attributions des Parrains</h1>
+
+    <nav class="bg-black text-white p-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="">Parrainage</h1>
+                </div>
+                <div class="flex items-center space-x-2" id="links">
+                    <?php if (isset($_SESSION['LOGGED_USER'])) : ?>
+                        <a href="logout.php">Déconnexion</a>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+
+    </nav>
+
+    <div class="container mt-4">
+        <h1 class="text-center font-bold text-3xl my-6">Attributions des Parrains</h1>
         <form method="post" action="admin.php">
-            <button type="submit" name="attribution" >Lancer l'attribution</button>
+            <button type="submit" name="attribution" class="p-2 bg-black text-white mb-4">Lancer l'attribution</button>
         </form>
         <table class="attributions-table">
             <thead>
                 <tr>
                     <th>Étudiant</th>
-                    <th>Classe Étudiant</th>
                     <th>Parrain</th>
-                    <th>Classe Parrain</th>
                 </tr>
             </thead>
             <tbody>
@@ -84,10 +103,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['attribution'])) {
                 $attributions = $sql_attributions->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($attributions as $attribution): ?>
                     <tr>
-                        <td><?php echo htmlspecialchars($attribution['etudiant_nom']); ?></td>
-                        <td><?php echo htmlspecialchars($attribution['etudiant_classe']); ?></td>
-                        <td><?php echo htmlspecialchars($attribution['parrain_nom']); ?></td>
-                        <td><?php echo htmlspecialchars($attribution['parrain_classe']); ?></td>
+                        <td><?php echo htmlspecialchars($attribution['etudiant_nom']); ?> - <?php echo htmlspecialchars($attribution['etudiant_classe']); ?></td>
+                        <td><?php echo htmlspecialchars($attribution['parrain_nom']); ?> - <?php echo htmlspecialchars($attribution['parrain_classe']); ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

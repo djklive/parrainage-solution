@@ -33,6 +33,11 @@ h1 {
 
 .attributions-table th {
     background-color: #f0f0f0;
+    text-align: center;
+}
+
+.attributions-table td {
+    text-align: center;
 }
 
 .attributions-table tr:hover {
@@ -55,5 +60,7 @@ button {
     cursor: pointer;
     border-radius: .3em;
 }
+
+
 
 
