@@ -20,8 +20,8 @@ require_once(__DIR__ . '/function.php');
     <main class="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-8">
         <section class="image-section md:w-1/2 lg:fixed lg:w-5/12 h-full">
             <div class="text-content">
-                <h1 class="text-3xl font-bold mb-4">Devenez prestataire</h1>
-                <p class="text-lg">Rejoignez notre communauté de professionnels et offrez vos services à un large public</p>
+                <h1 class="text-3xl font-bold mb-4">Rejoignez notre Programme de Parrainage</h1>
+                <p class="text-lg">Inscrivez-vous pour devenir un parrain ou un filleul et bénéficiez d'un soutien académique et social tout au long de votre parcours universitaire.</p>
             </div>
         </section>
 

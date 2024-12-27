@@ -58,7 +58,7 @@ if (isset($postData['submit'])) {
                     if ($user['email'] == "franckdjk@gmail.com") {
                         redirectToUrl('admin.php');
                     } else {
-                        redirectToUrl('profil.php?id='.$_SESSION['LOGGED_USER']['user_id']);
+                        redirectToUrl('profil.php');
                     }
                 } else {
                     $_SESSION['LOGIN_ERROR_MESSAGE'] = 'Mot de passe incorrect.';

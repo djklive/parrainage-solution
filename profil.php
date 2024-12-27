@@ -7,8 +7,8 @@ require_once(__DIR__ . '/function.php');
 
 if (isset($_SESSION['LOGGED_USER'])) {
     if ($_SESSION['LOGGED_USER']['niveau'] == 'Niveau 1') {
-        if (isset($_GET['id'])) {
-            $getid = intval($_GET['id']);
+        if (isset($_SESSION['LOGGED_USER']['user_id'])) {
+            $getid = intval($_SESSION['LOGGED_USER']['user_id']);
 
             $stmt = $mysqlClient->prepare("SELECT * FROM usersn1 WHERE id_user = ?");
             $stmt->execute([$getid]);
@@ -32,8 +32,8 @@ if (isset($_SESSION['LOGGED_USER'])) {
             redirectToUrl('formulaireConnexion.php');
         }
     } else if ($_SESSION['LOGGED_USER']['niveau'] == 'Niveau 2') {
-        if (isset($_GET['id'])) {
-            $getid = intval($_GET['id']);
+        if (isset($_SESSION['LOGGED_USER']['user_id'])) {
+            $getid = intval($_SESSION['LOGGED_USER']['user_id']);
 
             $stmt = $mysqlClient->prepare("SELECT * FROM usersn2 WHERE id_user = ?");
             $stmt->execute([$getid]);

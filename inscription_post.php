@@ -44,12 +44,12 @@ if (isset($postData['submit'])) {
                     // Faire l'insertion en base
                     $insertUsers = $mysqlClient->prepare('INSERT INTO usersn1(nom, prenom, tel, email, password, classe, niveau) VALUES (?,?,?,?,?,?,?)');
                     $insertUsers->execute(array($nom, $prenom, $tel, $email, $password, $classe, $category));
-                    $_SESSION['REGISTER_SUCCESS_MESSAGE'] = 'Votre compte a bien ete créer <a href="formulaireConnexion.php">connectez-vous</a>';
+                    $_SESSION['REGISTER_SUCCESS_MESSAGE'] = 'Votre compte a bien ete créer <a href="formulaireConnexion.php" class="text-black-500 underline italic font-bold ">connectez-vous</a>';
                     redirectToUrl('formulaireEtudiant.php');
                 } else if ($postData['category'] == 'Niveau 2') {
                     $insertUsers2 = $mysqlClient->prepare('INSERT INTO usersn2(nom, prenom, tel, email, password, classe, niveau) VALUES (?,?,?,?,?,?,?)');
                     $insertUsers2->execute(array($nom, $prenom, $tel, $email, $password, $classe, $category));
-                    $_SESSION['REGISTER_SUCCESS_MESSAGE'] = 'Votre compte a bien été créer <a href="formulaireConnexion.php">connectez-vous</a>';
+                    $_SESSION['REGISTER_SUCCESS_MESSAGE'] = 'Votre compte a bien été créer <a href="formulaireConnexion.php" class="text-black-500 underline italic font-bold ">connectez-vous</a>';
                     redirectToUrl('formulaireEtudiant.php');
                 }
                 
