@@ -18,6 +18,8 @@ require_once(__DIR__ . '/function.php');
 </head>
 <body class="bg-gray-100">
     <main class="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-8">
+        <a href="index.php"><img src="uploads/left_50px.png" alt=""></a>
+
         <section class="image-section md:w-1/2 lg:fixed lg:w-5/12 h-full">
             <div class="text-content">
                 <h1 class="text-3xl font-bold mb-4">Rejoignez notre Programme de Parrainage</h1>
@@ -43,6 +45,7 @@ require_once(__DIR__ . '/function.php');
                     <input type="password" name="password" id="password" class="form-input" placeholder="Entrer votre mot de passe">
                     <div class="error-message"></div>
                 </div>
+                
 
                 <?php 
                 // Affiche un message d'erreur de connexion s'il existe

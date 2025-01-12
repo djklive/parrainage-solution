@@ -16,6 +16,25 @@
     transform: scale(1.1);
 }
 
+.image-section {
+ 
+    background:linear-gradient(90deg,rgba(0,0,0,0.7),rgba(0,0,0,0.7)), url("../uploads/IAI-CMR.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    
+}
+
+.text-content {
+    color: white;
+    padding: 4rem 2rem;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
 .sidebar {
     position: fixed;
     top: 0; 
