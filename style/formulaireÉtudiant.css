@@ -21,7 +21,7 @@ body {
 }
 
 .image-section {
-    background: linear-gradient(90deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.6)), url("../uploads/robbie-lens.png");
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.6)), url("../uploads/books.jpg");
     background-size: cover;
     background-position: center;
     color: white;
